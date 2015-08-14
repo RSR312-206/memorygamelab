@@ -2,6 +2,7 @@
 
   var body = document.querySelector('body');
   var container = document.getElementById('container');
+  var score = document.getElementById('score');
   var div;
   var counter = 0;
   var clicked = [];
@@ -25,6 +26,13 @@
   div11: 'url("http://3.bp.blogspot.com/-6EQqAX2Sqec/TvpEs6R6B8I/AAAAAAAAAZo/GJvvR4mO2eA/s1600/piranha+1.jpg")'
   };
 
+function scoreTally() {
+  score.innerHTML = 'current score is ' + results.length / 2;
+
+  if (results.length == 16) {
+    alert('YOU WON!');
+  }
+}
   (function board() {
 
     for (var i = 1; i < 17; i++) {
@@ -43,10 +51,14 @@
 
       checker.addEventListener("click", function() {
         if (counter === 2) {
+          console.log(results);
          for (var i = 0; i < div.length; i ++) {
-          if(div[i].getAttribute('id') === results[0]) {
+            div[i].style.backgroundImage = '';
+          for (var j = 0; j < results.length; j ++) {
+            if(div[i].getAttribute('id') === results[j]) {
+              div[i].style.backgroundImage = images[results[j]];
+            }
           }
-          else {div[i].style.backgroundImage = '';}
         }
         counter = 0;
         }
@@ -58,10 +70,13 @@
               counter ++;
               clicked.push(images[key]);
               results.push(key);
-              if (clicked[0] === clicked[1]) {
-                console.log(results[0]);
-                clicked = [];
-              } else {results.pop(); results.pop();}
+              if (counter == 2) {
+                if (clicked[0] === clicked[1]) {
+                  clicked = [];
+                  scoreTally();
+                } else {results.pop(); results.pop();
+                  clicked = []; }
+              }
             }
           }
         }
@@ -70,5 +85,6 @@
     }
   })();
 div = document.querySelectorAll('div');
+
 })();
 
