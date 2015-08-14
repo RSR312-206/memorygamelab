@@ -3,9 +3,7 @@
   var body = document.querySelector('body');
   var container = document.getElementById('container');
   var div = document.querySelectorAll('div');
-
-
-  for (var i = 1; i < 17; i++) {
+  var counter = 0;
 
   var images = {div1: 'url("https://boldlyproclaimingchrist.files.wordpress.com/2009/09/wolf.jpg?w=600")',
                 div5: 'url("https://boldlyproclaimingchrist.files.wordpress.com/2009/09/wolf.jpg?w=600")',
@@ -27,12 +25,6 @@
 
   (function board() {
 
-    checker.style.float = "left";
-    checker.style.paddingBottom = '150px';
-    checker.style.width = '150px';
-    checker.style.border = 'solid 1px black';
-    checker.style.backgroundColor = 'teal';
-    checker.setAttribute('id', 'div' + i);
     for (var i = 1; i < 17; i++) {
       var checker = document.createElement('div');
 
@@ -43,6 +35,16 @@
       checker.style.border = 'solid 1px black';
       checker.style.backgroundColor = 'teal';
       checker.setAttribute('id', 'div' + i);
+
+      if (counter === 3) {
+       for (var i = 0; i < div.length; i ++) {
+        div[i].style.backgroundColor = 'teal';
+        counter = 0;
+        }
+      }
+
+
+
       checker.addEventListener("click", function() {
         if (this.style.backgroundColor === "teal") {
           for (var key in images) {
@@ -56,5 +58,3 @@
       container.appendChild(checker);
     }
   })();
-
-})();
