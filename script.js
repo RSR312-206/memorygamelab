@@ -4,6 +4,8 @@
   var container = document.getElementById('container');
   var div;
   var counter = 0;
+  var clicked = [];
+  var results = [];
 
   var images = {div1: 'url("https://boldlyproclaimingchrist.files.wordpress.com/2009/09/wolf.jpg?w=600")',
   div5: 'url("https://boldlyproclaimingchrist.files.wordpress.com/2009/09/wolf.jpg?w=600")',
@@ -21,46 +23,52 @@
   div16: 'url("http://i00.i.aliimg.com/wsphoto/v0/1904821646_1/ferocious-panther-diamond-painting-set-for-embroidery-diamond-cross-stitch-kit-Inlaid-decorative-painting-handmade-craft.jpg")',
   div12: 'url("http://3.bp.blogspot.com/-6EQqAX2Sqec/TvpEs6R6B8I/AAAAAAAAAZo/GJvvR4mO2eA/s1600/piranha+1.jpg")',
   div11: 'url("http://3.bp.blogspot.com/-6EQqAX2Sqec/TvpEs6R6B8I/AAAAAAAAAZo/GJvvR4mO2eA/s1600/piranha+1.jpg")'
-};
+  };
 
-(function board() {
+  (function board() {
 
-  for (var i = 1; i < 17; i++) {
-    var checker = document.createElement('div');
-
-
-    checker.style.float = "left";
-    checker.style.paddingBottom = '150px';
-    checker.style.width = '150px';
-    checker.style.border = 'solid 1px black';
-    checker.style.backgroundColor = 'teal';
-    checker.setAttribute('id', 'div' + i);
+    for (var i = 1; i < 17; i++) {
+      var checker = document.createElement('div');
 
 
+      checker.style.float = "left";
+      checker.style.paddingBottom = '150px';
+      checker.style.width = '150px';
+      checker.style.border = 'solid 1px black';
+      checker.style.backgroundColor = 'teal';
+      checker.setAttribute('id', 'div' + i);
 
 
-    checker.addEventListener("click", function() {
-      if (counter === 2) {
-        console.log(div);
-       for (var i = 0; i < div.length; i ++) {
-        div[i].style.backgroundImage = '';
-        counter = 0;
-      }
-    }
-    else if (this.style.backgroundColor === "teal") {
-      for (var key in images) {
-        if (key === this.getAttribute('id')) {
-          this.style.backgroundImage = images[key];
-          this.style.backgroundSize = "150px 150px";
-          counter ++;
-          console.log(counter);
+
+
+      checker.addEventListener("click", function() {
+        if (counter === 2) {
+         for (var i = 0; i < div.length; i ++) {
+          if(div[i].getAttribute('id') === results[0]) {
+          }
+          else {div[i].style.backgroundImage = '';}
         }
-      }
+        counter = 0;
+        }
+        else if (this.style.backgroundColor === "teal") {
+          for (var key in images) {
+            if (key === this.getAttribute('id')) {
+              this.style.backgroundImage = images[key];
+              this.style.backgroundSize = "150px 150px";
+              counter ++;
+              clicked.push(images[key]);
+              results.push(key);
+              if (clicked[0] === clicked[1]) {
+                console.log(results[0]);
+                clicked = [];
+              } else {results.pop(); results.pop();}
+            }
+          }
+        }
+      });
+      container.appendChild(checker);
     }
-  });
-    container.appendChild(checker);
-  }
-})();
+  })();
 div = document.querySelectorAll('div');
 })();
 
