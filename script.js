@@ -38,6 +38,19 @@
   }
   shuffleImages();
 
+  button.addEventListener('click', function() {
+    counter = 0;
+    clicked = [];
+    results = [];
+    scoreTally();
+    for (var i = 0; i < div.length; i ++) {
+      div[i].style.backgroundImage = '';
+    }
+      shuffleImages();
+  });
+
+
+
   function scoreTally() {
     score.innerHTML = 'current score is ' + results.length / 2;
 
