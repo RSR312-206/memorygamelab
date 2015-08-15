@@ -29,10 +29,8 @@
 
   function shuffleImages() {
     imageArray = _.shuffle(imageArray);
-    console.log(imageArray);
     for (var i = 0; i < 17; i++) {
       images["div" + (i+1)] = imageArray[i];
-      console.log(images);
     }
 
   }
@@ -78,7 +76,6 @@
 
       checker.addEventListener("click", function() {
         if (counter === 2) {
-          console.log(results);
           for (var i = 0; i < div.length; i ++) {
             div[i].style.backgroundImage = '';
             for (var j = 0; j < results.length; j ++) {
