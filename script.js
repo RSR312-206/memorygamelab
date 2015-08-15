@@ -8,6 +8,7 @@
   var clicked = [];
   var results = [];
   var button = document.querySelector('button');
+  var lastClicked;
 
   var images = {};
   var imageArray = ['url("https://boldlyproclaimingchrist.files.wordpress.com/2009/09/wolf.jpg?w=600")',
@@ -95,7 +96,7 @@
               clicked.push(images[key]);
               results.push(key);
               if (counter == 2) {
-                if (clicked[0] === clicked[1]) {
+                if (clicked[0] === clicked[1] && results[results.length-1] !== results[results.length-2]) {
                   clicked = [];
                   scoreTally();
                 } else {results.pop(); results.pop();
