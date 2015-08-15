@@ -8,6 +8,8 @@
   var clicked = [];
   var results = [];
   var button = document.querySelector('button');
+  var lastClicked;
+  var breakTrigger = false;
 
   var images = {};
   var imageArray = ['url("https://boldlyproclaimingchrist.files.wordpress.com/2009/09/wolf.jpg?w=600")',
@@ -29,10 +31,8 @@
 
   function shuffleImages() {
     imageArray = _.shuffle(imageArray);
-    console.log(imageArray);
     for (var i = 0; i < 17; i++) {
       images["div" + (i+1)] = imageArray[i];
-      console.log(images);
     }
 
   }
@@ -78,7 +78,6 @@
 
       checker.addEventListener("click", function() {
         if (counter === 2) {
-          console.log(results);
           for (var i = 0; i < div.length; i ++) {
             div[i].style.backgroundImage = '';
             for (var j = 0; j < results.length; j ++) {
@@ -99,15 +98,34 @@
               results.push(key);
               if (counter == 2) {
                 if (clicked[0] === clicked[1]) {
+                  for (var j = 0; j < results.length-2; j++) {
+                    if(results[results.length-1] === results[j] || results[results.length-2] === results[j]) {
+                      breakTrigger = true;
+                      break;
+                    }
+                  }
+                  if (breakTrigger === false && results[results.length-1] !== results[results.length-2]) {
+                    clicked = [];
+                    scoreTally();
+                  }
+                   else {
+                    results.pop();
+                    results.pop();
+                    clicked = [];
+                    breakTrigger = false;
+                  }
+                }
+                else {
+                  results.pop();
+                  results.pop();
                   clicked = [];
-                  scoreTally();
-                } else {results.pop(); results.pop();
-                  clicked = []; }
+                  breakTrigger = false;
                 }
               }
             }
           }
-        });
+        }
+      });
   container.appendChild(checker);
   }
   })();
