@@ -76,7 +76,9 @@
 
 
 
-      checker.addEventListener("click", function() {
+      checker.addEventListener("click", aMatch);
+
+      function aMatch() {
         if (counter === 2) {
           for (var i = 0; i < div.length; i ++) {
             div[i].style.backgroundImage = '';
@@ -88,6 +90,7 @@
           }
           counter = 0;
         }
+
         else if (this.style.backgroundColor === "teal") {
           for (var key in images) {
             if (key === this.getAttribute('id')) {
@@ -125,7 +128,7 @@
             }
           }
         }
-      });
+      };
   container.appendChild(checker);
   }
   })();
